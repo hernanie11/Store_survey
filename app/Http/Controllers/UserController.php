@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
@@ -43,7 +44,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $users = User::create([
             "id_prefix" => $request["personal_info"]["id_prefix"],
@@ -71,6 +72,7 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
