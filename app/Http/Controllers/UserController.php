@@ -35,10 +35,8 @@ class UserController extends Controller
         ->orderby('created_at', 'DESC')
         ->useFilters()
         ->dynamicPaginate();
-        
         return $user;
     }
-
     /**
      * Store a newly created resource in storage.
      *
