@@ -59,7 +59,6 @@ class UserController extends Controller
             "username" =>  $request["personal_info"]["username"],
             "password" => Crypt::encryptString($request["personal_info"]["username"])
         ]);
-
         return response()->json(['message' => 'Successfully Created'], 201);
     }
 
