@@ -30,9 +30,9 @@ class UserRequest extends FormRequest
                 'personal_info.last' => 'required',
                 'personal_info.username' => 'required|unique:users,username',
                 'personal_info.sex' => 'required',
-                'location_name' => 'required',
-                'department_name' => 'required',
-                'company_name' => 'required'
+                'location' => 'required',
+                'department' => 'required',
+                'company' => 'required'
 
             ];
         }
