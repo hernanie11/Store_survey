@@ -25,10 +25,15 @@ class UserRequest extends FormRequest
     {
         if($this->isMethod('post')){
             return [
-                'id_no' => 'required|unique:users,id_no',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'username' => 'required|unique:users,username'
+                'personal_info.id_no' => 'required|unique:users,id_no',
+                'personal_info.first' => 'required',
+                'personal_info.last' => 'required',
+                'personal_info.username' => 'required|unique:users,username',
+                'personal_info.sex' => 'required',
+                'location_name' => 'required',
+                'department_name' => 'required',
+                'company_name' => 'required'
+
             ];
         }
     }
