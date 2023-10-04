@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\RoleManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Http\Controllers\Auth\AuthController;
 */
 
 Route::post('/auth/login', [AuthController::class, 'Login']);
-Route::resource('user', UserController::class);
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //AUTH
@@ -28,7 +29,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //USER
     // Route::resource('user', UserController::class);
+    Route::resource('user', UserController::class);
     Route::put('user-archive-restore/{id}', [UserController::class, 'archive']);
+    
+    //ROLE MANAGEMENT
+    Route::resource('role', RoleManagementController::class);
+    Route::put('role-archive-restore/{id}', [RoleManagementController::class, 'archived']);
+    
+
 });
 
 

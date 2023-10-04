@@ -17,17 +17,15 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $status = $request->query('status');
-        if($status == NULL ){
-            $status = 1;
-        }
-        if($status == "active"){
-            $status = 1;
-        }
-        if($status == "deactivated"){
-            $status = 0;
-        }
-        if($status != "active" || $status != "deactivated"){
-            $status = 1;
+        switch ($status) {
+            case "active":
+            case null:
+            default:
+                $status = 1;
+                break;
+            case "deactivated":
+                $status = 0;
+                break;
         }
         $user = User::withTrashed()
         ->where(function($query) use($status){
@@ -106,10 +104,10 @@ class UserController extends Controller
     }
 
     public function archive(Request $request, $id){
-        // $auth_id = auth('sanctum')->user()->id;
-        // if($id == $auth_id){
-        //     return response()->json(['message' => 'Unable to Archive, User already in used!'],409);
-        // }
+        $auth_id = auth('sanctum')->user()->id;
+        if($id == $auth_id){
+            return response()->json(['message' => 'Unable to Archive, User already in used!'],409);
+        }
         $status = $request->status; 
         $User = User::query();
         if(!$User->withTrashed()->where('id',$id)->exists()){
