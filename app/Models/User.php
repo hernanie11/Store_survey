@@ -53,9 +53,15 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_active' => 'boolean',
+        'status' => 'boolean',
     ];
 
    
 
     protected string $default_filters = UserFilter::class;
+
+    public function role(){
+        return $this->belongsTo(RoleManagement::class, 'role_id','id');
+    }
 }

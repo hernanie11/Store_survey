@@ -31,6 +31,7 @@ class UserController extends Controller
         ->where(function($query) use($status){
             $query->where('is_active', $status);
         })
+        ->with('role')
         ->orderby('created_at', 'DESC')
         ->useFilters()
         ->dynamicPaginate();

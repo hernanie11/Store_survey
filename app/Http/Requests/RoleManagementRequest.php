@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RoleManagementRequest extends FormRequest
 {
@@ -31,7 +32,7 @@ class RoleManagementRequest extends FormRequest
             ];
             }
     
-            if($this->isMethod('put') &&  ($this->route()->parameter('role_management'))){
+            if($this->isMethod('put') &&  ($this->route()->parameter('role'))){
                 $id = $this->route()->parameter('role_management');
                 return [
                 // 'major_category_id' => 'exists:major_categories,id,deleted_at,NULL',

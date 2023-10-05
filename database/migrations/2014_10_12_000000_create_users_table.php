@@ -28,9 +28,13 @@ class CreateUsersTable extends Migration
             $table->string("department_name");
 
             $table->string("company_name");
-            // $table->unsignedInteger("role_id")->index();
-            $table->integer('role_id');
+            $table->unsignedInteger("role_id");
+            // $table->integer('role_id');
             $table->boolean('is_active')->default(true);
+            $table->foreign('role_id')
+            ->references('id')
+            ->on('role_management')
+            ->onDelete('cascade');
 
             $table->rememberToken();
             $table->timestamps();
