@@ -81,9 +81,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+       
+        $role_id = $request->role_id;
+        $User = User::find($id);
+        if(!$User){
+            return response()->json(['error' => 'User Route Not Found'], 404);
+        }
+        if(User::where('id', $id)->where('role_id', $role_id)->exists()){
+            return response()->json(['message' => 'No Changes'], 200);
+        }
+        $update = User::where('id',$id)
+        ->update([
+           'role_id' => $role_id
+       ]);
+
+       return response()->json(['message' => 'Successfully Updated!'], 201);
     }
 
     /**

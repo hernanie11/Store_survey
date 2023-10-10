@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -34,6 +35,24 @@ class UserRequest extends FormRequest
                 'department' => 'required',
                 'company' => 'required'
 
+            ];
+        }
+
+        if($this->isMethod('put') &&  ($this->route()->parameter('user'))){
+            $id = $this->route()->parameter('user');
+            return [
+            // 'major_category_id' => 'exists:major_categories,id,deleted_at,NULL',
+                // 'username' => ['required',Rule::unique('users','username')->ignore($id)],
+                'role_id' => 'required|exists:role_management,id'
+                
+            ];
+        }
+
+
+        if($this->isMethod('put') && ($this->route()->parameter('id'))){
+            return [
+                'status' => 'required|boolean',
+                // 'id' => 'exists:major_categories,id',
             ];
         }
     }
