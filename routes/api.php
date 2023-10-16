@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoleManagementController;
 
 /*
@@ -37,6 +39,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('role-archive-restore/{id}', [RoleManagementController::class, 'archived']);
     
 
+    //Department
+    Route::resource('department', DepartmentController::class);
+
+    //Company
+    Route::resource('company', CompanyController::class);
 });
 
 
