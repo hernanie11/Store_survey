@@ -35,6 +35,14 @@ class UserController extends Controller
         ->orderby('created_at', 'DESC')
         ->useFilters()
         ->dynamicPaginate();
+        foreach($user as $role){
+        //    return $role->role->access_permission;
+           $access_permission = explode(", ", $role->role->access_permission);
+        
+            $role['role']['access_permission_array'] = $access_permission;
+         
+        }
+
         return $user;
     }
     /**
